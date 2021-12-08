@@ -1,7 +1,8 @@
-from Utils import read_data
+from Utils import read_data, read_data_as_numbers
 
-classic_diagram = [(1000 * [0]) for _ in range(1000)]
-diagram_with_diagonals = [(1000 * [0]) for _ in range(1000)]
+required_size = max(read_data_as_numbers(5)) + 1
+classic_diagram = [(required_size * [0]) for _ in range(required_size)]
+diagram_with_diagonals = [(required_size * [0]) for _ in range(required_size)]
 
 for entry in read_data(5):
     (x1, y1), (x2, y2) = [point.split(",") for point in entry.split(" -> ")]
