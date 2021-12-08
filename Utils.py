@@ -1,4 +1,5 @@
 import os
+import re
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
@@ -13,9 +14,10 @@ def read_data_as_numbers(number_from_one):
     result = []
     with open(os.path.join(__location__, f"Data By Day/{number_from_one}.txt")) as file:
         while (line := file.readline().rstrip()):
-            try:
-                number = int(line)
-                result.append(number)
-            except ValueError:
-                pass
+            for string in re.split('\W+', line):
+                try:
+                    number = int(string)
+                    result.append(number)
+                except ValueError:
+                    pass
     return result
