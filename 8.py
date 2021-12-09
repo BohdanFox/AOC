@@ -28,9 +28,7 @@ for entry in data:
     second_part = [''.join(sorted(word)) for word in second_part]
     possible_permutations = list(itertools.permutations("ABCDEFG"))
     for permutation in possible_permutations:
-        changed_numbers = []
-        for word in first_part:
-            changed_numbers.append(calculate_word_adter_permutation(permutation, word))
+        changed_numbers = [calculate_word_adter_permutation(permutation, word) for word in first_part]
         if set(changed_numbers) == set(original_numbers):
             result = ""
             for word in second_part:
