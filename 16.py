@@ -1,6 +1,5 @@
-from typing import List
+from typing import List, Union
 from Utils import read_data_as_numbers
-import numpy as np
 
 class Transmission:
     __binary_string: str
@@ -9,11 +8,11 @@ class Transmission:
     __packet_versions: List
 
     @property
-    def packet_versions(self):
+    def packet_versions(self) -> List[int]:
         return self.__packet_versions
 
     @property
-    def final_value(self):
+    def final_value(self) -> int:
         return self.__final_value
 
     def __init__(self, binary_str) -> None:
@@ -22,7 +21,7 @@ class Transmission:
         self.__index = 0
         self.__final_value = self.__read_packet(True)
 
-    def __read_packet(self, top_level=False):
+    def __read_packet(self, top_level: bool=False) -> int:
         sub_packets = []
 
         packet_version = self.__read_new_binary_number(3)
@@ -72,7 +71,7 @@ class Transmission:
             case _:        
                 raise ValueError
 
-    def __read_new_binary_number(self, binary_length, as_int=True):
+    def __read_new_binary_number(self, binary_length: int, as_int: bool =True) -> Union[int, str]:
         result = ""
         for _ in range(binary_length):
             result += self.__binary_string[self.__index]
@@ -80,7 +79,6 @@ class Transmission:
         if as_int:
             result = int(result, 2)
         return result
-
 
 
 data = read_data_as_numbers(16, 16, True)
